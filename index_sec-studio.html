@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0a0c12" />
+  <title>Sectorium Studio — Assets & Systèmes Premium pour Roblox</title>
+  <meta name="description" content="Sectorium Studio propose un abonnement d'assets et systèmes Roblox (transport en commun) : accès aux packs existants + nouveautés mensuelles, avec un modèle de partage partenaire." />
+  <style>
+    :root{
+      --bg:#070910;
+      --bg2:#0a0c12;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.085);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(255,255,255,.18);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.56);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow2: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --accent1:#7c5cff;
+      --accent2:#21d4fd;
+      --accent3:#b6ff6a;
+      --danger:#ff4d6d;
+      --ok:#4dffb5;
+      --warning:#ffd166;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 900px at 15% 0%, rgba(124,92,255,.28), transparent 60%),
+        radial-gradient(900px 700px at 85% 10%, rgba(33,212,253,.18), transparent 62%),
+        radial-gradient(1000px 900px at 50% 110%, rgba(182,255,106,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    button{font-family:inherit}
+    .wrap{
+      width:min(1160px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    /* Top nav */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,9,16,.86), rgba(7,9,16,.55));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .navinner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      user-select:none;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(124,92,255,.95), rgba(33,212,253,.7));
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.16), rgba(255,255,255,0));
+      animation: spin 5.8s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .brandtxt{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .brandtxt b{font-size:15px; letter-spacing:.2px}
+    .brandtxt span{font-size:12px; color:var(--muted2)}
+    .navlinks{
+      display:flex; align-items:center; gap:14px;
+    }
+    .navlinks a{
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 10px;
+      border-radius:12px;
+      transition:.2s ease;
+    }
+    .navlinks a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .navcta{
+      display:flex; align-items:center; gap:10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      user-select:none;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background:linear-gradient(135deg, var(--accent2), var(--accent1));
+      box-shadow:0 0 20px rgba(33,212,253,.35);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:650;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .12s ease, background .2s ease, border .2s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.20); background: rgba(255,255,255,.09)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(33,212,253,.7));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 55px rgba(124,92,255,.20);
+    }
+    .btn.primary:hover{filter:saturate(1.03) brightness(1.03)}
+    .btn.ghost{
+      background:transparent;
+      border-color: rgba(255,255,255,.14);
+    }
+    .burger{
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      cursor:pointer;
+    }
+    .burger span{display:block;width:18px;height:2px;background:rgba(234,240,255,.8); margin:4px 0; border-radius:2px}
+
+    /* Hero */
+    .hero{
+      padding:56px 0 28px;
+      position:relative;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .hcard{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hcard:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(650px 260px at 20% 0%, rgba(124,92,255,.30), transparent 60%),
+        radial-gradient(500px 240px at 85% 12%, rgba(33,212,253,.18), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hcontent{position:relative; padding:28px}
+    .kicker{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      margin-bottom:16px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+    }
+    .tag strong{color:var(--text); font-weight:700}
+    .title{
+      font-size:42px;
+      line-height:1.05;
+      margin:0 0 14px;
+      letter-spacing:-.5px;
+    }
+    .subtitle{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width:64ch;
+    }
+    .ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:14px}
+    .micro{
+      margin-top:14px;
+      font-size:12px;
+      color:var(--muted2);
+      line-height:1.55;
+    }
+    .micro code{font-family:var(--mono); font-size:12px; color: rgba(234,240,255,.85)}
+
+    /* Right panel */
+    .side{
+      padding:18px;
+    }
+    .side .box{
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.12);
+      padding:16px;
+    }
+    .side h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .stat{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-top:1px dashed rgba(255,255,255,.12);
+    }
+    .stat:first-of-type{border-top:0}
+    .stat b{font-size:13px}
+    .stat span{font-size:12px; color:var(--muted2); display:block; margin-top:4px; line-height:1.4}
+    .chip{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      white-space:nowrap;
+    }
+
+    /* Sections */
+    section{padding:34px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:14px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.2px;
+    }
+    .sectionHead p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+      line-height:1.5;
+      max-width:70ch;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      position:relative;
+      overflow:hidden;
+      min-height: 160px;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(240px 140px at 15% 10%, rgba(124,92,255,.22), transparent 65%),
+        radial-gradient(240px 140px at 85% 10%, rgba(33,212,253,.14), transparent 60%);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+    .card h4{margin:2px 0 8px; font-size:14px}
+    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
+    .ico{
+      width:38px;height:38px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      margin-bottom:10px;
+      font-family:var(--mono);
+      color: rgba(234,240,255,.82);
+    }
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+    }
+    .priceCard{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      padding:18px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .priceCard:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 260px at 20% 0%, rgba(182,255,106,.12), transparent 60%),
+                  radial-gradient(520px 260px at 88% 12%, rgba(124,92,255,.18), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .priceCard > *{position:relative}
+    .row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .bigPrice{
+      font-size:34px; font-weight:800; letter-spacing:-.5px; margin:6px 0 0;
+    }
+    .small{
+      font-size:12px; color:var(--muted2); line-height:1.5;
+    }
+    .list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .check{
+      width:18px;height:18px;border-radius:6px;
+      background: rgba(77,255,181,.12);
+      border:1px solid rgba(77,255,181,.30);
+      display:inline-flex; align-items:center; justify-content:center;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+    .check svg{width:12px;height:12px}
+    .warn{
+      background: rgba(255,209,102,.12);
+      border-color: rgba(255,209,102,.26);
+    }
+    .warn .check{
+      background: rgba(255,209,102,.14);
+      border-color: rgba(255,209,102,.30);
+    }
+
+    /* Catalogue */
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin: 10px 0 14px;
+    }
+    .input{
+      flex: 1 1 220px;
+      min-width: 220px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 11px 12px;
+      color: var(--text);
+      outline:none;
+    }
+    .select{
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 11px 12px;
+      color: var(--text);
+      outline:none;
+    }
+    .gridItems{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .item{
+      grid-column: span 4;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    }
+    .thumb{
+      height: 126px;
+      background:
+        radial-gradient(220px 120px at 30% 20%, rgba(33,212,253,.18), transparent 60%),
+        radial-gradient(220px 120px at 70% 0%, rgba(124,92,255,.22), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position:relative;
+    }
+    .thumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.26));
+      pointer-events:none;
+    }
+    .itemBody{padding:14px}
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      margin-top:10px;
+    }
+    .badge{
+      font-size:11px;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .badge.hot{
+      border-color: rgba(124,92,255,.28);
+      background: rgba(124,92,255,.10);
+      color: rgba(234,240,255,.86);
+    }
+    .badge.new{
+      border-color: rgba(33,212,253,.30);
+      background: rgba(33,212,253,.10);
+      color: rgba(234,240,255,.86);
+    }
+    .badge.free{
+      border-color: rgba(77,255,181,.28);
+      background: rgba(77,255,181,.10);
+      color: rgba(234,240,255,.86);
+    }
+
+    /* FAQ accordion */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    details{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 12px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.20);
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:700;
+      font-size:13px;
+      color: rgba(234,240,255,.92);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{
+      width:22px;height:22px;border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      display:flex;align-items:center;justify-content:center;
+      flex:0 0 auto;
+      transition: transform .18s ease;
+    }
+    details[open] .chev{transform: rotate(180deg)}
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:18px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 260px at 20% 0%, rgba(33,212,253,.12), transparent 60%),
+                  radial-gradient(520px 260px at 88% 12%, rgba(124,92,255,.18), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .panel > *{position:relative}
+    label{display:block; font-size:12px; color:var(--muted2); margin:10px 0 6px}
+    textarea{
+      width:100%;
+      min-height:120px;
+      resize:vertical;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 11px 12px;
+      color: var(--text);
+      outline:none;
+    }
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+
+    /* Footer */
+    footer{
+      padding:26px 0 50px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.22));
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+      flex-wrap:wrap;
+    }
+    .foot small{color:var(--muted2); line-height:1.6}
+    .foot a{color:var(--muted); text-decoration:underline; text-underline-offset:3px}
+    .modal{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 20px;
+      z-index:100;
+    }
+    .modal.open{display:flex}
+    .modalCard{
+      width:min(820px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,12,18,.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow:hidden;
+    }
+    .modalHead{
+      padding: 14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .modalBody{padding:16px}
+    .modalBody h3{margin:0 0 10px; font-size:15px}
+    .modalBody p{margin:0 0 10px; color:var(--muted); font-size:13px; line-height:1.65}
+    .kbd{font-family:var(--mono); font-size:12px; padding:3px 7px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: rgba(234,240,255,.85)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr; }
+      .pricing{grid-template-columns: 1fr;}
+      .faq{grid-template-columns: 1fr;}
+      .contact{grid-template-columns: 1fr;}
+      .cards .card{grid-column: span 6;}
+      .gridItems .item{grid-column: span 6;}
+    }
+    @media (max-width: 720px){
+      .navlinks{display:none}
+      .burger{display:inline-block}
+      .title{font-size:34px}
+      .cards .card{grid-column: span 12;}
+      .gridItems .item{grid-column: span 12;}
+      .two{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap navinner">
+      <div class="brand" role="banner" aria-label="Sectorium Studio">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brandtxt">
+          <b>Sectorium Studio</b>
+          <span>Assets & systèmes Roblox — Transport & RP</span>
+        </div>
+      </div>
+
+      <nav class="navlinks" aria-label="Navigation principale">
+        <a href="#concept">Concept</a>
+        <a href="#offres">Offres</a>
+        <a href="#catalogue">Catalogue</a>
+        <a href="#partenariat">Partenariat</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="navcta">
+        <div class="pill" title="Service en développement actif">
+          <span class="dot"></span> Build en cours • v0.9
+        </div>
+        <button class="btn ghost burger" id="burger" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+        <button class="btn primary" id="openModal">Rejoindre / S’abonner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap grid">
+      <div class="hcard">
+        <div class="hcontent">
+          <div class="kicker">
+            <span class="tag"><strong>Abonnement</strong> • Packs mensuels</span>
+            <span class="tag"><strong>Roblox</strong> • Transport en commun</span>
+            <span class="tag"><strong>Pro</strong> • Intégration simple</span>
+          </div>
+
+          <h1 class="title">Des assets “transport” propres, stables et beaux — livrés chaque mois.</h1>
+          <p class="subtitle">
+            Sectorium Studio propose un modèle clair : <b>un abonnement mensuel</b> qui donne accès à
+            <b>tous les packs déjà publiés</b> + <b>les nouveautés du mois</b>.
+            Le but : financer une infra fiable, et sortir des systèmes vraiment premium.
+          </p>
+
+          <div class="ctas">
+            <a class="btn primary" href="#offres">Voir l’offre</a>
+            <a class="btn" href="#catalogue">Explorer le catalogue</a>
+            <button class="btn ghost" id="openModal2">Proposer un partenariat</button>
+          </div>
+
+          <p class="micro">
+            Objectif : une expérience “plug & play” pour les jeux RP et transport (bus, tram, gare, régulation, GUI).
+            <br />Infra visée : <code>~100€/an</code> en promo (souvent) et <code>~170–180€/an</code> hors promo, pour encaisser les gros pics.
+          </p>
+        </div>
+      </div>
+
+      <aside class="hcard side" aria-label="Résumé">
+        <div class="box">
+          <h3>Ce que tu obtiens</h3>
+
+          <div class="stat">
+            <div>
+              <b>Accès total</b>
+              <span>Anciennes releases + nouvelles releases chaque mois.</span>
+            </div>
+            <div class="chip">∞ packs</div>
+          </div>
+
+          <div class="stat">
+            <div>
+              <b>Qualité “studio”</b>
+              <span>UI soignée, systèmes clean, intégration documentée.</span>
+            </div>
+            <div class="chip">Top build</div>
+          </div>
+
+          <div class="stat">
+            <div>
+              <b>Stable & scalable</b>
+              <span>Conçu pour tenir sur des gros opens et multi-serveurs.</span>
+            </div>
+            <div class="chip">Fiable</div>
+          </div>
+
+          <div class="stat">
+            <div>
+              <b>Partenariats</b>
+              <span>Une part des fonds peut être reversée à un groupe partenaire.</span>
+            </div>
+            <div class="chip">Win/Win</div>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="#partenariat">Lire le modèle partenaire</a>
+            <a class="btn ghost" href="#faq">Questions fréquentes</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- CONCEPT -->
+  <section id="concept">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Le concept</h2>
+          <p>
+            Le projet est né d’un constat : un système peut être cool, mais sans infra solide + modèle stable,
+            ça tombe à l’eau. Ici, on repart sur une base propre.
+          </p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="ico">01</div>
+          <h4>Un abonnement, pas des galères</h4>
+          <p>
+            Au lieu de vendre “au hasard”, on crée une bibliothèque qui grandit :
+            tu t’abonnes → tu as accès à tout, tout de suite.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="ico">02</div>
+          <h4>Chaque mois : une sélection publiée</h4>
+          <p>
+            Une sélection d’assets/systèmes sort mensuellement.
+            Elle rejoint la bibliothèque et reste disponible tant que tu es abonné.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="ico">03</div>
+          <h4>Transport en commun & RP</h4>
+          <p>
+            Bus / tram / gares / panneaux / régulation / UI réalistes.
+            L’objectif : des jeux plus immersifs, plus “pro”.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="ico">04</div>
+          <h4>Infra fiable (coût réel)</h4>
+          <p>
+            Pour encaisser les gros opens, on vise une infra payante et stable :
+            <b>~100€/an en promo</b>, sinon <b>~170–180€/an</b>.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="ico">05</div>
+          <h4>Qualité d’interface</h4>
+          <p>
+            On mise sur le rendu : UI “chic”, détails, polish.
+            Pas un truc bricolé : un rendu studio.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="ico">06</div>
+          <h4>Partage partenaire (optionnel)</h4>
+          <p>
+            Si un groupe contribue (builds, UI, scripts…), une part des revenus
+            peut être reversée selon un modèle transparent.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRES -->
+  <section id="offres">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Offres & modèle économique</h2>
+          <p>
+            L’idée : une formule simple, accessible (ex : 2–4€/mois), qui aide à financer l’infrastructure
+            et la production régulière d’assets.
+          </p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="priceCard">
+          <div class="row">
+            <div>
+              <div class="tag"><strong>Abonnement</strong> • Bibliothèque + nouveautés</div>
+              <div class="bigPrice">3,99€ <span style="font-size:14px;color:var(--muted2);font-weight:700">/ mois</span></div>
+              <div class="small">Exemple de prix (modifiable). Sans engagement, annulable à tout moment.</div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+              <button class="btn primary" id="openModal3">S’abonner</button>
+              <a class="btn ghost" href="#catalogue">Voir ce qui est inclus</a>
+            </div>
+          </div>
+
+          <ul class="list" aria-label="Avantages">
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Accès à <b>tous les packs déjà publiés</b> (scripts, builds, GUI, modules).
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <b>Nouveautés mensuelles</b> : un certain nombre d’assets ajoutés chaque mois.
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <b>Documentation</b> d’intégration + conseils (installation, dépendances, configs).
+            </li>
+            <li class="warn">
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 9v4m0 4h.01" stroke="rgba(255,209,102,.9)" stroke-width="2.4" stroke-linecap="round"/></svg>
+              </span>
+              Le prix reste pensé pour <b>rembourser l’infra</b> et maintenir la qualité (pas “2€ reversés sur 3€”).
+            </li>
+          </ul>
+        </div>
+
+        <div class="priceCard">
+          <div class="row">
+            <div>
+              <div class="tag"><strong>Infra</strong> • Fiabilité et montée en charge</div>
+              <div class="bigPrice">100€ <span style="font-size:14px;color:var(--muted2);font-weight:700">/ an</span></div>
+              <div class="small">Budget cible en promo (souvent). Hors promo : <b>170–180€</b> / an.</div>
+            </div>
+            <div class="chip">Transparence</div>
+          </div>
+
+          <ul class="list" aria-label="Pourquoi ce budget ?">
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Tenir les pics : <b>gros opens</b>, téléchargements, multi-serveurs.
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Fiabilité : meilleure dispo, moins de “ça marche pas”, moins de stress.
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Image pro : un service stable inspire confiance (et donc des abonnés).
+            </li>
+          </ul>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" id="openModal4">Voir comment on bosse</button>
+            <a class="btn ghost" href="#partenariat">Modèle partenaire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section id="catalogue">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Catalogue (exemples)</h2>
+          <p>
+            Quelques exemples de ce qu’on sort. Ici c’est une vitrine : tu peux remplacer par tes vrais packs,
+            ou brancher ça sur une base plus tard.
+          </p>
+        </div>
+      </div>
+
+      <div class="filters" aria-label="Filtres">
+        <input class="input" id="search" placeholder="Rechercher un asset (ex: panneau, gare, bus, UI…)" />
+        <select class="select" id="type">
+          <option value="all">Tous les types</option>
+          <option value="system">Systèmes</option>
+          <option value="ui">GUI / UI</option>
+          <option value="build">Builds</option>
+          <option value="module">Modules</option>
+        </select>
+        <select class="select" id="tier">
+          <option value="all">Tous</option>
+          <option value="included">Inclus abonnement</option>
+          <option value="free">Gratuit (preview)</option>
+        </select>
+      </div>
+
+      <div class="gridItems" id="items" aria-label="Liste des assets"></div>
+
+      <div style="margin-top:14px; color:var(--muted2); font-size:12px; line-height:1.6">
+        Astuce : garde 1–2 items “preview gratuits” pour montrer la qualité, puis le reste via abonnement.
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTENARIAT -->
+  <section id="partenariat">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Partenariat : “toi + moi + l’équipe”</h2>
+          <p>
+            Si un groupe participe à la production (builds, UI, scripts…), on peut mettre en place un modèle de partage.
+            Objectif : rester viable (rembourser l’infra) tout en récompensant les contributeurs.
+          </p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="ico">A</div>
+          <h4>Contributions claires</h4>
+          <p>
+            Chaque mois, on définit les livrables : systèmes, builds, UI, modules.
+            Les contributions sont suivies et attribuées.
+          </p>
+        </div>
+        <div class="card">
+          <div class="ico">B</div>
+          <h4>Sélection mensuelle</h4>
+          <p>
+            On choisit ensemble ce qu’on publie. Tout ce qui sort intègre la bibliothèque
+            (accessible aux abonnés).
+          </p>
+        </div>
+        <div class="card">
+          <div class="ico">C</div>
+          <h4>Reversement raisonnable</h4>
+          <p>
+            Une part des fonds peut être reversée au groupe partenaire,
+            <b>après</b> couverture des coûts (infra, outils, maintenance).
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="priceCard">
+        <div class="row">
+          <div>
+            <div class="tag"><strong>Exemple de modèle</strong> • Ajustable</div>
+            <p class="small" style="margin:8px 0 0">
+              Tu peux afficher un exemple sans donner un pourcentage fixe publiquement (à gérer en privé).
+            </p>
+          </div>
+          <button class="btn primary" id="openModal5">Discuter partenariat</button>
+        </div>
+
+        <ul class="list" style="margin-top:12px">
+          <li>
+            <span class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Étape 1 : couvrir l’infra (objectif annuel) + réserve maintenance.
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Étape 2 : partager une partie du net sur la base des contributions du mois.
+          </li>
+          <li class="warn">
+            <span class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 9v4m0 4h.01" stroke="rgba(255,209,102,.9)" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+            Pas de promesse irréaliste : le but n’est pas de reverser “presque tout” si ça tue le projet.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>FAQ</h2>
+          <p>Les questions qu’on nous pose (et celles qui évitent les malentendus).</p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Est-ce que je garde les assets si j’annule ? <span class="chev">⌄</span></summary>
+          <p>
+            Par défaut, l’abonnement donne accès tant qu’il est actif (logique “bibliothèque”).
+            Si tu veux un modèle “licence à vie” sur certains packs, tu peux le proposer en option plus tard.
+          </p>
+        </details>
+
+        <details>
+          <summary>Pourquoi un abonnement plutôt qu’un achat unique ? <span class="chev">⌄</span></summary>
+          <p>
+            Parce que l’objectif est la stabilité : infra + maintenance + sorties régulières.
+            Sans modèle récurrent, tu risques de retomber dans le “projet qui meurt faute d’acheteurs”.
+          </p>
+        </details>
+
+        <details>
+          <summary>Vous ciblez quels jeux ? <span class="chev">⌄</span></summary>
+          <p>
+            Principalement Roblox : jeux RP et transport (bus/tram/gares/régulation).
+            Mais certaines UI/modules peuvent servir ailleurs.
+          </p>
+        </details>
+
+        <details>
+          <summary>Et si un gros serveur arrive et tout casse ? <span class="chev">⌄</span></summary>
+          <p>
+            Justement : le budget infra est prévu pour éviter ça.
+            On vise un hébergement stable, et une architecture pensée pour la montée en charge.
+          </p>
+        </details>
+
+        <details>
+          <summary>Comment se passe un partenariat concret ? <span class="chev">⌄</span></summary>
+          <p>
+            On définit des livrables mensuels (scripts/build/UI). Les contributions sont attribuées.
+            Ensuite, un partage est fait sur le net (après couverture des coûts).
+          </p>
+        </details>
+
+        <details>
+          <summary>Vous utilisez quoi pour distribuer les packs ? <span class="chev">⌄</span></summary>
+          <p>
+            Au choix : site + espace “members”, Discord + liens privés, ou portail dédié.
+            Ici c’est une vitrine ; la partie “paiement + accès” peut être branchée ensuite.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Contact</h2>
+          <p>
+            Si tu veux proposer un partenariat (ou demander un pack), envoie un message.
+            Le formulaire ci-dessous ouvre ton logiciel mail (tu peux le remplacer par un vrai backend).
+          </p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="panel">
+          <h3 style="margin:0 0 8px">Envoyer un message</h3>
+          <div class="small">Réponse sous 24–72h selon la charge.</div>
+
+          <form id="mailForm">
+            <div class="two">
+              <div>
+                <label>Nom / Pseudo</label>
+                <input class="input" id="name" placeholder="Ex : dark_priv9967" required />
+              </div>
+              <div>
+                <label>Email (ou Discord tag)</label>
+                <input class="input" id="contactField" placeholder="Ex : pseudo@domaine.fr ou pseudo#0000" required />
+              </div>
+            </div>
+
+            <label>Sujet</label>
+            <input class="input" id="subject" placeholder="Ex : Partenariat — assets transport" required />
+
+            <label>Message</label>
+            <textarea id="message" placeholder="Explique ton besoin / ton idée / ce que tu veux construire…"></textarea>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+              <button class="btn primary" type="submit">Ouvrir le mail</button>
+              <button class="btn ghost" type="button" id="openModal6">Rejoindre / S’abonner</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin:0 0 8px">Raccourcis</h3>
+          <div class="small">Remplace ces infos par tes vrais liens (Discord, store, docs…).</div>
+
+          <ul class="list" style="margin-top:12px">
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Discord : <b>discord.gg/TONINVITE</b> (à remplacer)
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Documentation : <b>/docs</b> (à créer) ou Google Docs / Notion
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="rgba(77,255,181,.85)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              Boutique : <b>Stripe / Ko-fi / Sellix</b> (au choix)
+            </li>
+            <li class="warn">
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 9v4m0 4h.01" stroke="rgba(255,209,102,.9)" stroke-width="2.4" stroke-linecap="round"/></svg>
+              </span>
+              Important : prévoir des <b>CGU / CGV</b> si tu vends/abonnements (je peux te les rédiger).
+            </li>
+          </ul>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="#offres">Revoir l’offre</a>
+            <a class="btn ghost" href="#faq">Lire la FAQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex; gap:12px; align-items:center">
+        <div class="logo" style="width:34px;height:34px;border-radius:13px"></div>
+        <div>
+          <b>Sectorium Studio</b><br />
+          <small>Assets & systèmes Roblox — Transport & RP</small>
+        </div>
+      </div>
+      <small>
+        © <span id="year"></span> Sectorium Studio. Vitrine concept (modifiable).<br/>
+        <a href="#" id="openLegal">Mentions & conditions</a> · <a href="#contact">Contact</a>
+      </small>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Rejoindre Sectorium Studio">
+    <div class="modalCard">
+      <div class="modalHead">
+        <div style="display:flex; align-items:center; gap:10px">
+          <div class="logo" style="width:32px;height:32px;border-radius:12px"></div>
+          <div>
+            <b>Rejoindre Sectorium Studio</b><br/>
+            <small style="color:var(--muted2)">Abonnement, accès packs & partenariats</small>
+          </div>
+        </div>
+        <button class="btn ghost" id="closeModal" aria-label="Fermer">Fermer <span class="kbd">Esc</span></button>
+      </div>
+      <div class="modalBody" id="modalBody">
+        <h3>Ce que tu peux faire maintenant</h3>
+        <p>
+          Ce site est une vitrine. Pour passer en production :
+          <b>paiement (Stripe/Ko-fi)</b> + <b>espace membre</b> + <b>distribution des packs</b>.
+          Je peux te coder la partie “members” ensuite.
+        </p>
+        <p>
+          En attendant, tu peux mettre tes liens ci-dessous :
+        </p>
+
+        <div class="two">
+          <div>
+            <label>Lien Discord</label>
+            <input class="input" id="discordLink" placeholder="discord.gg/TONINVITE" />
+          </div>
+          <div>
+            <label>Lien Boutique / Abonnement</label>
+            <input class="input" id="storeLink" placeholder="https://..." />
+          </div>
+        </div>
+
+        <label>Message rapide (optionnel)</label>
+        <textarea id="quickMsg" placeholder="Ex : Je veux m’abonner / Je propose un partenariat / Je veux un pack gare…"></textarea>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+          <button class="btn primary" id="copyTemplate">Copier un message Discord</button>
+          <button class="btn" id="openEmail">Ouvrir un email</button>
+          <button class="btn ghost" id="openLegal2">Mentions & conditions</button>
+        </div>
+
+        <p class="small" style="margin-top:10px">
+          Conseil : mets un salon Discord <b>#annonces</b> + <b>#support</b> + <b>#catalogue</b> + un bot pour gérer les rôles “abonné”.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGAL MODAL (simple) -->
+  <div class="modal" id="legal" aria-hidden="true" role="dialog" aria-label="Mentions et conditions">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>Mentions & conditions (template)</b>
+        <button class="btn ghost" id="closeLegal" aria-label="Fermer">Fermer <span class="kbd">Esc</span></button>
+      </div>
+      <div class="modalBody">
+        <p><b>Vitrine / Projet</b> — Ce site est une présentation de concept. Les liens boutique et la distribution peuvent être ajoutés ultérieurement.</p>
+        <p><b>Contenu</b> — Les assets, scripts, builds, UI et modules sont protégés. Toute revente/redistribution non autorisée peut être interdite selon les conditions définies.</p>
+        <p><b>Abonnement</b> — L’accès aux contenus peut dépendre d’un abonnement actif. Les règles exactes (annulation, accès, licence) doivent être précisées dans des CGU/CGV.</p>
+        <p><b>Partenariat</b> — Les modalités de reversement sont discutées en privé et peuvent dépendre des coûts fixes (infrastructure, maintenance, outils).</p>
+        <p class="small">⚠️ Je peux te rédiger des CGU/CGV complètes (style pro) selon ton pays, tes moyens de paiement et ton modèle de licence.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ----------------------------
+    // Demo data: replace by your real assets
+    // ----------------------------
+    const ASSETS = [
+      { title:"Panneau d’information Gare (UI)", type:"ui", tier:"included", flags:["new"], desc:"Affichage type gare (statuts, voies, messages). Skin premium, responsive." },
+      { title:"Système d’annonces sonores", type:"system", tier:"included", flags:["hot"], desc:"Gestion d’annonces + files d’attente + presets (gare/bus/tram)." },
+      { title:"Module horaires & lignes (transport)", type:"module", tier:"included", flags:[], desc:"Gestion des lignes, itinéraires, arrêts, exports JSON, intégration facile." },
+      { title:"Pack station de tram (build)", type:"build", tier:"included", flags:["hot"], desc:"Station réaliste + panneaux + détails RP. Optimisé perf." },
+      { title:"Feux tram (script) — preview", type:"system", tier:"free", flags:["free"], desc:"Petit aperçu gratuit : feu tram avec logique de phase + détection." },
+      { title:"Dashboard régulation (UI)", type:"ui", tier:"included", flags:["new"], desc:"Interface régulation : état réseau, incidents, suivi, logs, esthétique pro." }
+    ];
+
+    const $ = (q) => document.querySelector(q);
+    const itemsEl = $("#items");
+    const searchEl = $("#search");
+    const typeEl = $("#type");
+    const tierEl = $("#tier");
+
+    function badgeHTML(flag){
+      if(flag === "hot") return `<span class="badge hot">Populaire</span>`;
+      if(flag === "new") return `<span class="badge new">Nouveau</span>`;
+      if(flag === "free") return `<span class="badge free">Gratuit</span>`;
+      return "";
+    }
+
+    function typeLabel(t){
+      return ({system:"Système", ui:"GUI / UI", build:"Build", module:"Module"}[t] || "Asset");
+    }
+
+    function render(){
+      const q = (searchEl.value || "").trim().toLowerCase();
+      const t = typeEl.value;
+      const tier = tierEl.value;
+
+      const filtered = ASSETS.filter(a => {
+        const matchQ = !q || (a.title + " " + a.desc).toLowerCase().includes(q);
+        const matchT = (t === "all") || a.type === t;
+        const matchTier = (tier === "all") || a.tier === tier;
+        return matchQ && matchT && matchTier;
+      });
+
+      itemsEl.innerHTML = filtered.map(a => `
+        <article class="item">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="itemBody">
+            <h4 style="margin:0 0 6px; font-size:14px">${a.title}</h4>
+            <div class="small">${a.desc}</div>
+            <div class="meta">
+              <span class="badge">${typeLabel(a.type)}</span>
+              <span class="badge">${a.tier === "included" ? "Inclus abonnement" : "Preview gratuit"}</span>
+              ${a.flags.map(badgeHTML).join("")}
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      if(filtered.length === 0){
+        itemsEl.innerHTML = `
+          <div class="priceCard" style="grid-column:1/-1">
+            <b>Aucun résultat.</b>
+            <p class="small" style="margin:6px 0 0">Essaie un autre mot-clé ou remets “Tous les types”.</p>
+          </div>
+        `;
+      }
+    }
+
+    searchEl.addEventListener("input", render);
+    typeEl.addEventListener("change", render);
+    tierEl.addEventListener("change", render);
+    render();
+
+    // ----------------------------
+    // Modal logic
+    // ----------------------------
+    const modal = $("#modal");
+    const legal = $("#legal");
+
+    function openModal(){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+    function openLegal(){
+      legal.classList.add("open");
+      legal.setAttribute("aria-hidden", "false");
+    }
+    function closeLegal(){
+      legal.classList.remove("open");
+      legal.setAttribute("aria-hidden", "true");
+    }
+
+    ["#openModal","#openModal2","#openModal3","#openModal4","#openModal5","#openModal6"].forEach(id=>{
+      const el = $(id);
+      if(el) el.addEventListener("click", openModal);
+    });
+
+    $("#closeModal").addEventListener("click", closeModal);
+    $("#openLegal").addEventListener("click", (e)=>{ e.preventDefault(); openLegal(); });
+    $("#openLegal2").addEventListener("click", openLegal);
+    $("#closeLegal").addEventListener("click", closeLegal);
+
+    // close on backdrop click
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+    legal.addEventListener("click", (e)=>{ if(e.target === legal) closeLegal(); });
+
+    // close on escape
+    window.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){ closeModal(); closeLegal(); closeMobileMenu(); }
+    });
+
+    // ----------------------------
+    // Copy a Discord template message
+    // ----------------------------
+    $("#copyTemplate").addEventListener("click", async ()=>{
+      const discordLink = ($("#discordLink").value || "discord.gg/TONINVITE").trim();
+      const storeLink = ($("#storeLink").value || "https://TON-ABONNEMENT").trim();
+      const extra = ($("#quickMsg").value || "").trim();
+
+      const msg =
+`Salut ! 👋
+Je viens pour Sectorium Studio.
+
+• Je veux : ${extra || "m’abonner / discuter un partenariat"}
+• Discord : ${discordLink}
+• Boutique / abonnement : ${storeLink}
+
+Je peux aussi vous dire mon projet Roblox (transport/RP) + ce que je cherche (UI, systèmes, builds).`;
+
+      try{
+        await navigator.clipboard.writeText(msg);
+        const btn = $("#copyTemplate");
+        const old = btn.textContent;
+        btn.textContent = "Copié ✅";
+        setTimeout(()=>btn.textContent = old, 1200);
+      }catch{
+        alert("Impossible de copier automatiquement. Sélectionne et copie manuellement:\n\n" + msg);
+      }
+    });
+
+    // ----------------------------
+    // Open email from modal
+    // ----------------------------
+    $("#openEmail").addEventListener("click", ()=>{
+      const extra = ($("#quickMsg").value || "").trim();
+      const subject = encodeURIComponent("Sectorium Studio — Abonnement / Partenariat");
+      const body = encodeURIComponent(
+        `Bonjour,\n\nJe vous contacte pour Sectorium Studio.\n\nDemande: ${extra || "m’abonner / discuter un partenariat"}\n\nMerci !`
+      );
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+
+    // ----------------------------
+    // Contact form: mailto
+    // ----------------------------
+    $("#mailForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const name = ($("#name").value || "").trim();
+      const contact = ($("#contactField").value || "").trim();
+      const subject = ($("#subject").value || "").trim();
+      const message = ($("#message").value || "").trim();
+
+      const fullSubject = encodeURIComponent(`[Sectorium] ${subject}`);
+      const fullBody = encodeURIComponent(
+        `Nom/Pseudo: ${name}\nContact: ${contact}\n\nMessage:\n${message}\n`
+      );
+
+      window.location.href = `mailto:?subject=${fullSubject}&body=${fullBody}`;
+    });
+
+    // ----------------------------
+    // Mobile menu (simple)
+    // ----------------------------
+    let mobileOpen = false;
+    const burger = $("#burger");
+
+    function closeMobileMenu(){
+      const m = $("#mobileMenu");
+      if(m) m.remove();
+      mobileOpen = false;
+    }
+
+    function openMobileMenu(){
+      if(mobileOpen) return;
+      mobileOpen = true;
+
+      const menu = document.createElement("div");
+      menu.id = "mobileMenu";
+      menu.style.position = "fixed";
+      menu.style.top = "70px";
+      menu.style.left = "20px";
+      menu.style.right = "20px";
+      menu.style.zIndex = "80";
+      menu.style.borderRadius = "18px";
+      menu.style.border = "1px solid rgba(255,255,255,.14)";
+      menu.style.background = "rgba(10,12,18,.92)";
+      menu.style.backdropFilter = "blur(16px)";
+      menu.style.boxShadow = "0 18px 60px rgba(0,0,0,.55)";
+      menu.style.padding = "12px";
+
+      const links = [
+        ["Concept","#concept"],
+        ["Offres","#offres"],
+        ["Catalogue","#catalogue"],
+        ["Partenariat","#partenariat"],
+        ["FAQ","#faq"],
+        ["Contact","#contact"]
+      ];
+
+      menu.innerHTML = links.map(([t,h])=>`
+        <a href="${h}" style="
+          display:block; padding:12px 12px; margin:6px 0;
+          border-radius:14px; border:1px solid rgba(255,255,255,.10);
+          background: rgba(255,255,255,.05); color: rgba(234,240,255,.92);
+          font-size:14px;
+        ">${t}</a>
+      `).join("") + `
+        <button id="mobileJoin" class="btn primary" style="width:100%; margin-top:8px">Rejoindre / S’abonner</button>
+      `;
+
+      document.body.appendChild(menu);
+
+      menu.querySelectorAll("a").forEach(a=>{
+        a.addEventListener("click", ()=> closeMobileMenu());
+      });
+      menu.querySelector("#mobileJoin").addEventListener("click", ()=>{
+        closeMobileMenu();
+        openModal();
+      });
+
+      // close if click outside
+      setTimeout(()=>{
+        const handler = (e)=>{
+          if(!menu.contains(e.target) && e.target !== burger){
+            closeMobileMenu();
+            window.removeEventListener("click", handler);
+          }
+        };
+        window.addEventListener("click", handler);
+      }, 0);
+    }
+
+    burger.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      if(mobileOpen) closeMobileMenu();
+      else openMobileMenu();
+    });
+
+    // Footer year
+    $("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
